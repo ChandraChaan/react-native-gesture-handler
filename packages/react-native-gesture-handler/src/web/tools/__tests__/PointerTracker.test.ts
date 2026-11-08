@@ -17,7 +17,7 @@ function moveEvent(pointerId: number, x: number, time: number): AdaptedEvent {
 }
 
 describe('PointerTracker velocity', () => {
-  it('computes the velocity of each pointer from its own samples', () => {
+  test('computes the velocity of each pointer from its own samples', () => {
     const tracker = new PointerTracker();
 
     tracker.addToTracker(moveEvent(1, 0, 0));
@@ -34,7 +34,7 @@ describe('PointerTracker velocity', () => {
     expect(tracker.getVelocity(2)?.x).toBeCloseTo(0, 0);
   });
 
-  it('uses the samples of the requested pointer in getVelocityAt', () => {
+  test('uses the samples of the requested pointer in getVelocityAt', () => {
     const tracker = new PointerTracker();
 
     tracker.addToTracker(moveEvent(1, 0, 0));
@@ -49,7 +49,7 @@ describe('PointerTracker velocity', () => {
     expect(tracker.getVelocityAt(2, 168)?.x).toBeCloseTo(0, 0);
   });
 
-  it('does not reuse the samples of a pointer that was removed', () => {
+  test('does not reuse the samples of a pointer that was removed', () => {
     const tracker = new PointerTracker();
 
     tracker.addToTracker(moveEvent(1, 0, 0));
