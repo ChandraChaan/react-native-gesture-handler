@@ -1,0 +1,19 @@
+# Fork-only helper: the upstream "Run Jest tests" workflow is restricted to the
+# upstream repository, so it never runs on forks. This copy runs the same
+# jest package tests on pull requests opened inside the fork.
+name: Fork verify jest
+
+on:
+  pull_request:
+
+jobs:
+  jest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          cache: yarn
+      - run: yarn --immutable
+      - run: yarn workspace react-native-gesture-handler test
